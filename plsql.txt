@@ -1,0 +1,57 @@
+-- Create the Employee Table
+CREATE TABLE Employee (
+    Employee_ID     NUMBER PRIMARY KEY,        -- Employee ID (Primary Key)
+    First_Name      VARCHAR2(50),               -- First Name (Max 50 chars)
+    Last_Name       VARCHAR2(50),               -- Last Name (Max 50 chars)
+    Email           VARCHAR2(100),              -- Email (Max 100 chars)
+    Contact_Number  NUMBER(10),                 -- Contact Number (Max 10 digits)
+    Designation     VARCHAR2(20),               -- Designation (Clerk, Manager, Accountant)
+    Salary          NUMBER(10, 2)               -- Salary (Max 10 digits, with 2 decimal places)
+);
+
+-- Insert Demo Records into Employee Table
+INSERT INTO Employee (Employee_ID, First_Name, Last_Name, Email, Contact_Number, Designation, Salary) VALUES (1, 'John', 'Doe', 'john.doe@example.com', 9876543210, 'Clerk', 25000);
+INSERT INTO Employee (Employee_ID, First_Name, Last_Name, Email, Contact_Number, Designation, Salary) VALUES (2, 'Jane', 'Smith', 'jane.smith@example.com', 9876543211, 'Manager', 50000);
+INSERT INTO Employee (Employee_ID, First_Name, Last_Name, Email, Contact_Number, Designation, Salary) VALUES (3, 'Alice', 'Johnson', 'alice.johnson@example.com', 9876543212, 'Clerk', 24000);
+INSERT INTO Employee (Employee_ID, First_Name, Last_Name, Email, Contact_Number, Designation, Salary) VALUES (4, 'Bob', 'Brown', 'bob.brown@example.com', 9876543213, 'Accountant', 60000);
+INSERT INTO Employee (Employee_ID, First_Name, Last_Name, Email, Contact_Number, Designation, Salary) VALUES (5, 'Charlie', 'Davis', 'charlie.davis@example.com', 9876543214, 'Clerk', 22000);
+INSERT INTO Employee (Employee_ID, First_Name, Last_Name, Email, Contact_Number, Designation, Salary) VALUES (6, 'David', 'Martinez', 'david.martinez@example.com', 9876543215, 'Manager', 55000);
+INSERT INTO Employee (Employee_ID, First_Name, Last_Name, Email, Contact_Number, Designation, Salary) VALUES (7, 'Eva', 'Garcia', 'eva.garcia@example.com', 9876543216, 'Clerk', 23000);
+INSERT INTO Employee (Employee_ID, First_Name, Last_Name, Email, Contact_Number, Designation, Salary) VALUES (8, 'Frank', 'Miller', 'frank.miller@example.com', 9876543217, 'Accountant', 65000);
+INSERT INTO Employee (Employee_ID, First_Name, Last_Name, Email, Contact_Number, Designation, Salary) VALUES (9, 'Grace', 'Wilson', 'grace.wilson@example.com', 9876543218, 'Clerk', 21000);
+INSERT INTO Employee (Employee_ID, First_Name, Last_Name, Email, Contact_Number, Designation, Salary) VALUES (10, 'Henry', 'Taylor', 'henry.taylor@example.com', 9876543219, 'Manager', 58000);
+
+
+
+-- Update Salary for Employees with Designation 'Clerk' (Add 1000 to Salary)
+BEGIN
+    FOR emp IN (SELECT Employee_ID, First_Name, Last_Name, Designation, Salary FROM Employee WHERE Designation = 'Clerk') LOOP
+        -- Update the salary for the clerk
+        UPDATE Employee
+        SET Salary = emp.Salary + 1000
+        WHERE Employee_ID = emp.Employee_ID;
+        
+        -- Output updated details
+        DBMS_OUTPUT.PUT_LINE(emp.First_Name || ' ' || emp.Last_Name || ' | ' || emp.Designation || ' | New Salary: ' || (emp.Salary + 1000));
+    END LOOP;
+    COMMIT; -- Commit the transaction after the update
+END;
+
+-- Update Salary for Employees with Designation 'Manager' (Add 10% to Salary)
+BEGIN
+    FOR emp IN (SELECT Employee_ID, First_Name, Last_Name, Designation, Salary FROM Employee WHERE Designation = 'Manager') LOOP
+        -- Calculate the new salary (10% increase)
+        UPDATE Employee
+        SET Salary = emp.Salary * 1.10
+        WHERE Employee_ID = emp.Employee_ID;
+        
+        -- Output updated details
+        DBMS_OUTPUT.PUT_LINE(emp.First_Name || ' ' || emp.Last_Name || ' | ' || emp.Designation || ' | New Salary: ' || (emp.Salary * 1.10));
+    END LOOP;
+    COMMIT; -- Commit the transaction after the update
+END;
+
+-- Select and display the updated employee details
+SELECT First_Name || ' ' || Last_Name AS Name, Designation, Salary
+FROM Employee;
+

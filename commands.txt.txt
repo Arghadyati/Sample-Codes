@@ -1,0 +1,22 @@
+-- insert into data.txt
+echo "180607, Rahul Varma,12.12.22,Savings,30000" >> data.txt
+echo "180608, Sita Raman,12.12.22,Joint,50000" >> data.txt
+echo "190607, Sheetal Patil,20.07.22,Current,40000" >> data.txt
+echo "190617, Pooja Patil,04.08.22,Salary,70000" >> data.txt
+echo "200607, Rahul Sharma,20.08.22,SAVINGS,20000" >> data.txt
+echo "210617, Pooja Srikari,20.08.22,SALARY,25000" >> data.txt
+echo "210607, Pooja Rewa,20.08.22,joint,35000" >> data.txt
+echo "210527, Dan Stewart,04.08.22,current,35000" >> data.txt
+echo "280707, Sia R,21.09.23,Savings,30000" >> data.txt
+echo "220888, Sonali G,1.05.23,Savings,15000" >> data.txt
+--Check if inserted properly
+cat data.txt
+--"UNIX command to display the customers having 
+balance greater than or equal to 30000."
+ awk -F, '$5+0 >= 30000' data.txt
+--UNIX command to display the total balance of customers having a Joint account
+awk -F, '$4 ~ /joint|Joint/ {sum += $5} END {print sum}' data.txt
+-- UNIX command to search for customers having account number 222635 and 180607.
+grep -E '222635|180607' data.txt
+--UNIX command to display the average balance of all customers except those having a Joint account.
+awk -F, '$4 !~ /joint|Joint/ {sum += $5; count++} END {if (count > 0) print sum / count; else print 0}' data.txt

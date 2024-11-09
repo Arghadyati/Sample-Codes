@@ -1,0 +1,213 @@
+REM   Script: Sql for sprint1
+REM   Basic sql commands
+
+CREATE TABLE Customer ( 
+    Customer_SSN_ID NUMBER PRIMARY KEY,  -- Numeric value for Employee ID (Primary Key) 
+    First_Name VARCHAR2(50),             -- First Name (Max 50 characters) 
+    Last_Name VARCHAR2(50),              -- Last Name (Max 50 characters) 
+    Email VARCHAR2(100),                 -- Email Address 
+    Date_Of_Birth DATE,                  -- Date of Birth (YYYY-MM-DD) 
+    Address VARCHAR2(100),               -- Address (Max 100 characters) 
+    Contact_Number VARCHAR2(10)          -- Contact Number (Maximum 10 digits) 
+)
+;
+
+INSERT INTO Customer (Customer_SSN_ID, First_Name, Last_Name, Email, Date_Of_Birth, Address, Contact_Number)  
+VALUES 
+(1001, 'John', 'Doe', 'john.doe@example.com', TO_DATE('1990-01-15', 'YYYY-MM-DD'), '123 Elm Street, Springfield', '9876543210')
+;
+
+INSERT INTO Customer (Customer_SSN_ID, First_Name, Last_Name, Email, Date_Of_Birth, Address, Contact_Number)  
+VALUES 
+(1002, 'Jane', 'Smith', 'jane.smith@example.com', TO_DATE('1985-02-20', 'YYYY-MM-DD'), '456 Oak Street, Denver', '8765432109')
+;
+
+INSERT INTO Customer (Customer_SSN_ID, First_Name, Last_Name, Email, Date_Of_Birth, Address, Contact_Number)  
+VALUES 
+(1003, 'Alice', 'Brown', 'alice.brown@example.com', TO_DATE('1992-05-25', 'YYYY-MM-DD'), '789 Pine Street, Dallas', '7654321098')
+;
+
+INSERT INTO Customer (Customer_SSN_ID, First_Name, Last_Name, Email, Date_Of_Birth, Address, Contact_Number)  
+VALUES 
+(1004, 'Bob', 'Johnson', 'bob.johnson@example.com', TO_DATE('1980-07-30', 'YYYY-MM-DD'), '321 Maple Street, Chicago', '6543210987')
+;
+
+INSERT INTO Customer (Customer_SSN_ID, First_Name, Last_Name, Email, Date_Of_Birth, Address, Contact_Number)  
+VALUES 
+(1005, 'Charlie', 'Davis', 'charlie.davis@example.com', TO_DATE('1995-08-05', 'YYYY-MM-DD'), '654 Cedar Street, Los Angeles', '5432109876')
+;
+
+INSERT INTO Customer (Customer_SSN_ID, First_Name, Last_Name, Email, Date_Of_Birth, Address, Contact_Number)  
+VALUES 
+(1006, 'David', 'Martinez', 'david.martinez@example.com', TO_DATE('1990-12-12', 'YYYY-MM-DD'), '987 Birch Street, Miami', '4321098765')
+;
+
+INSERT INTO Customer (Customer_SSN_ID, First_Name, Last_Name, Email, Date_Of_Birth, Address, Contact_Number)  
+VALUES 
+(1007, 'Eve', 'Miller', 'eve.miller@example.com', TO_DATE('1988-11-22', 'YYYY-MM-DD'), '234 Redwood Street, Seattle', '3210987654')
+;
+
+INSERT INTO Customer (Customer_SSN_ID, First_Name, Last_Name, Email, Date_Of_Birth, Address, Contact_Number)  
+VALUES 
+(1008, 'Frank', 'Wilson', 'frank.wilson@example.com', TO_DATE('1993-10-03', 'YYYY-MM-DD'), '567 Willow Street, Boston', '2109876543')
+;
+
+INSERT INTO Customer (Customer_SSN_ID, First_Name, Last_Name, Email, Date_Of_Birth, Address, Contact_Number)  
+VALUES 
+(1009, 'Grace', 'Moore', 'grace.moore@example.com', TO_DATE('1994-03-15', 'YYYY-MM-DD'), '890 Fir Street, San Francisco', '1098765432')
+;
+
+INSERT INTO Customer (Customer_SSN_ID, First_Name, Last_Name, Email, Date_Of_Birth, Address, Contact_Number)  
+VALUES 
+(1010, 'Hannah', 'Taylor', 'hannah.taylor@example.com', TO_DATE('1987-04-10', 'YYYY-MM-DD'), '123 Birch Street, New York', '9876123456')
+;
+
+SELECT  
+    Customer_SSN_ID,  
+    First_Name || ' ' || Last_Name AS Name,  
+    Email,  
+    Contact_Number,  
+    Address 
+FROM  
+    Customer 
+WHERE  
+    Customer_SSN_ID = 1001
+;
+
+CREATE TABLE Customer_Transaction ( 
+    Customer_ID NUMBER PRIMARY KEY,           -- Customer ID (Primary Key) 
+    Customer_Name VARCHAR2(100),              -- Customer Name (First Name + Last Name) 
+    Account_Number NUMBER,                    -- Account Number 
+    IFSC_Code VARCHAR2(11),                   -- IFSC Code 
+    Account_Balance NUMBER(15, 2),            -- Account Balance (Up to 15 digits and 2 decimal places) 
+    Aadhar_Card_No VARCHAR2(12),              -- Aadhar Card No. 
+    Pan_Card_No VARCHAR2(10),                 -- Pan Card No. 
+    Contact_Number VARCHAR2(10)               -- Contact Number (Same as in Customer table) 
+)
+;
+
+ALTER TABLE Customer_Transaction 
+MODIFY Aadhar_Card_No VARCHAR2(14)
+;
+
+ALTER TABLE Customer_Transaction 
+MODIFY IFSC_Code VARCHAR2(12)
+;
+
+INSERT INTO Customer_Transaction  
+(Customer_ID, Customer_Name, Account_Number, IFSC_Code, Account_Balance, Aadhar_Card_No, Pan_Card_No, Contact_Number) 
+VALUES 
+(1001, 'John Doe', 123456789012, 'SBIN0001234', 50000.00, '1234-5678-9123', 'ABCDE1234F', '9876543210')
+;
+
+INSERT INTO Customer_Transaction  
+(Customer_ID, Customer_Name, Account_Number, IFSC_Code, Account_Balance, Aadhar_Card_No, Pan_Card_No, Contact_Number) 
+VALUES 
+(1002, 'Jane Smith', 234567890123, 'ICIC0001234', 30000.00, '2345-6789-1234', 'ABCDE2345G', '8765432109')
+;
+
+INSERT INTO Customer_Transaction  
+(Customer_ID, Customer_Name, Account_Number, IFSC_Code, Account_Balance, Aadhar_Card_No, Pan_Card_No, Contact_Number) 
+VALUES 
+(1003, 'Alice Brown', 345678901234, 'HDFC0001234', 100000.00, '3456-7890-1234', 'ABCDE3456H', '7654321098')
+;
+
+INSERT INTO Customer_Transaction  
+(Customer_ID, Customer_Name, Account_Number, IFSC_Code, Account_Balance, Aadhar_Card_No, Pan_Card_No, Contact_Number) 
+VALUES 
+(1004, 'Bob Johnson', 456789012345, 'AXIS0001234', 25000.00, '4567-8901-2345', 'ABCDE4567I', '6543210987')
+;
+
+INSERT INTO Customer_Transaction  
+(Customer_ID, Customer_Name, Account_Number, IFSC_Code, Account_Balance, Aadhar_Card_No, Pan_Card_No, Contact_Number) 
+VALUES 
+(1005, 'Charlie Davis', 567890123456, 'KOTAK0001234', 75000.00, '5678-9012-3456', 'ABCDE5678J', '5432109876')
+;
+
+INSERT INTO Customer_Transaction  
+(Customer_ID, Customer_Name, Account_Number, IFSC_Code, Account_Balance, Aadhar_Card_No, Pan_Card_No, Contact_Number) 
+VALUES 
+(1006, 'David Martinez', 678901234567, 'SBI0001234', 120000.00, '6789-0123-4567', 'ABCDE6789K', '4321098765')
+;
+
+INSERT INTO Customer_Transaction  
+(Customer_ID, Customer_Name, Account_Number, IFSC_Code, Account_Balance, Aadhar_Card_No, Pan_Card_No, Contact_Number) 
+VALUES 
+(1007, 'Eve Miller', 789012345678, 'ICIC0002345', 5000.00, '7890-1234-5678', 'ABCDE7890L', '3210987654')
+;
+
+INSERT INTO Customer_Transaction  
+(Customer_ID, Customer_Name, Account_Number, IFSC_Code, Account_Balance, Aadhar_Card_No, Pan_Card_No, Contact_Number) 
+VALUES 
+(1008, 'Frank Wilson', 890123456789, 'HDFC0002345', 20000.00, '8901-2345-6789', 'ABCDE8901M', '2109876543')
+;
+
+INSERT INTO Customer_Transaction  
+(Customer_ID, Customer_Name, Account_Number, IFSC_Code, Account_Balance, Aadhar_Card_No, Pan_Card_No, Contact_Number) 
+VALUES 
+(1009, 'Grace Moore', 901234567890, 'AXIS0002345', 60000.00, '9012-3456-7890', 'ABCDE9012N', '1098765432')
+;
+
+INSERT INTO Customer_Transaction  
+(Customer_ID, Customer_Name, Account_Number, IFSC_Code, Account_Balance, Aadhar_Card_No, Pan_Card_No, Contact_Number) 
+VALUES 
+(1010, 'Hannah Taylor', 101234567890, 'KOTAK0002345', 150000.00, '0123-4567-8901', 'ABCDE0123O', '9876123456')
+;
+
+SELECT  
+    c.Customer_SSN_ID, 
+    c.First_Name || ' ' || c.Last_Name AS Customer_Name,  -- Concatenate First and Last Name 
+    t.Account_Number, 
+    t.IFSC_Code, 
+    t.Account_Balance, 
+    t.Aadhar_Card_No, 
+    t.Pan_Card_No, 
+    c.Date_Of_Birth, 
+    c.Email, 
+    c.Address, 
+    c.Contact_Number 
+FROM  
+    Customer c 
+JOIN  
+    Customer_Transaction t  
+    ON c.Customer_SSN_ID = t.Customer_ID 
+WHERE  
+    c.Customer_SSN_ID = 1001
+;
+
+UPDATE Customer 
+SET  
+    Contact_Number = '9876543219',  -- New phone number 
+    Address = 'London'  -- New address 
+WHERE  
+    Customer_SSN_ID = 1001
+;
+
+SELECT  
+    c.Customer_SSN_ID, 
+    c.First_Name || ' ' || c.Last_Name AS Name,  -- Concatenate First and Last Name 
+    c.Email, 
+    t.Account_Balance 
+FROM  
+    Customer c 
+JOIN  
+    Customer_Transaction t  
+    ON c.Customer_SSN_ID = t.Customer_ID 
+WHERE  
+    c.Customer_SSN_ID = 1001
+;
+
+SELECT  
+    c.Customer_SSN_ID, 
+    c.First_Name || ' ' || c.Last_Name AS Name,  -- Concatenate First and Last Name 
+    c.Email, 
+    t.Account_Balance 
+FROM  
+    Customer c 
+JOIN  
+    Customer_Transaction t  
+    ON c.Customer_SSN_ID = t.Customer_ID 
+WHERE  
+    c.Customer_SSN_ID = 1001
+;
+
